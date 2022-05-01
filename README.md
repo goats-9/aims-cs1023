@@ -22,3 +22,10 @@ To remove the whole cloned repo on your local system, type
 
 ```sh clean_uninstall.sh```
 
+# Documentation
+Mini-AIMS uses a filesystem and various integrity checks to prevent data redundancy and enhance data security in case of bad inputs. 
+
+The various functionalities that can be done by a student, faculty, or admin appear as a list each time you have to input a number for performing the operation.
+
+# Acknowledgements
+I would like to thank the course instructor Dr. M. V. Panduranga Rao, Faculty Advisor, Computer Science and Engineering, IIT Hyderabad, for giving me this wonderful opportunity to have a crack at learning the rudimentary principles of developing reliable, solid and secure software.
