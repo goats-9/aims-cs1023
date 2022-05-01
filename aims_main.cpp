@@ -117,7 +117,7 @@ int main() {
 				int b = get_int(pd + cst, 1);
 				err((b >= 0 && b <= 3), "Entered status is invalid.");
 				int c = get_int("Enter semester: ", 0);
-				err((c >= 1 && c <= 8), "Entered semester is invalid.");
+				err((c >= 1 && c <= 10), "Entered semester is invalid.");
 				int d = get_int("Enter starting segment: ", 0);
 				err((d >= 0 && d <= 5), "Entered starting segment is invaild.");
 				int e = get_int("Enter ending segment: ", 0);
