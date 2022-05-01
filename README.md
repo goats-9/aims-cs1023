@@ -46,7 +46,8 @@ Mini-AIMS uses a filesystem and various integrity checks to prevent data redunda
   5          | Project/Thesis
   6          | Seminar
     
-The various functionalities that can be done by a student, faculty, or admin appear as a list each time you have to input a number for performing the operation.
+## Functionality
+This implementation of the student portal focusses on B.Tech courses for durations upto 5 years. The various functionalities that can be done by a student, faculty, or admin appear as a list each time you have to input a number for performing the operation.
 
 # Acknowledgements
 I would like to thank the course instructor Dr. M. V. Panduranga Rao, Faculty Advisor, Computer Science and Engineering, IIT Hyderabad, for giving me this wonderful opportunity to have a crack at learning the rudimentary principles of developing reliable, solid and secure software.
