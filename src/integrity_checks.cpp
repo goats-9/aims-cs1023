@@ -73,12 +73,47 @@ int isEnrolled(string st_id, string c_id) {
 	return 0;
 }
 
-// To verify whether the legality of entered password is correct
-int isLegal(string s) {
+// To check if the password entered is legal
+int isLegalPwd(string s) {
 	int n = s.size();
 	if (n < 8) return 0;
 	for (int i = 0; i < n; i++) if (s[i] < 33 && s[i] > 126) return 0;
 	return 1;
+}
+
+// To check if the username or coursename (cl == -1) entered is legal
+int isLegalID(string s, int cl) {
+	vector<string> dspln = {"AI", "BM", "BT", "CE", "CS", "EE", "ES", "ME", "MA"};
+	if (cl == -1) {
+		if (s.size() != 6) return 0;
+		if (find(dspln.begin(), dspln.end(), s.substr(0, 2)) == dspln.end()) return 0;
+		if (!(s[2] >= '1' && s[2] <= '4')) return 0;
+		if (!isdigit(s[3]) || !isdigit(s[4])) return 0;
+		if (!(s[5] >= '0' && s[5] <= '6')) return 0;
+		return 1;
+	} else if (cl == 0) {
+		if (s.size() != 14) return 0;
+		if (find(dspln.begin(), dspln.end(), s.substr(0, 2)) == dspln.end()) return 0;
+		if (!isdigit(s[2]) || !isdigit(s[3]))  return 0;
+		if (s.substr(4, 5) != "BTECH") return 0;
+		for (int i = 9; i < 14; i++) if (!isdigit(s[i])) return 0;
+		return 1;
+	} else if (cl == 1) {
+		if (s.size() != 9) return 0;
+		if (find(dspln.begin(), dspln.end(), s.substr(0, 2)) == dspln.end()) return 0;
+		if (!isdigit(s[2]) || !isdigit(s[3])) return 0;
+		if (s[4] != '_' || s[5] != 'F') return 0;
+		for (int i = 6; i < 9; i++) if (!isdigit(s[i])) return 0;
+		return 1;
+	} else if (cl == 2) {
+		if (s.size() != 9) return 0;
+		if (s.substr(0, 2) != "AD") return 0;
+		if (!isdigit(s[2]) || !isdigit(s[3])) return 0;
+		if (s[4] != '_' || s[5] != 'A') return 0;
+		for (int i = 6; i < 9; i++) if (!isdigit(s[i])) return 0;
+		return 1;
+	}
+	return 0;
 }
 
 // To check if the grade entered is legal

@@ -13,6 +13,7 @@ void dump(string path) {
 			break;
 		}
 	}
+	fflush(stdout);
 }
 
 // To return a string (using getline)
@@ -23,7 +24,10 @@ void dump(string path) {
 string get_str(string prompt, int x) {
 	string s;
 	if (x) dump(prompt);
-	else cout << prompt;
+	else {
+		cout << prompt;
+		fflush(stdout);
+	}
 	getline(cin, s);
 	fflush(stdout);
 	return s;
@@ -43,8 +47,8 @@ int get_int(string prompt, int x) {
 			cout << "Invalid integer input! ";
 			dump(prompt);
 			cin.clear();
-			fflush(stdout);
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			fflush(stdout);
 		}
 	}
 }

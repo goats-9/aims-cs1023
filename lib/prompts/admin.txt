@@ -1,14 +1,14 @@
 Please enter the operation you want to perform as follows:
 0 -- Change password
-1 -- Assign a faculty to a course
-2 -- Remomve a faculty from a course
-3 -- Add a course
-4 -- Change the status of a course
-5 -- View all courses
-6 -- Remove a course
-7 -- View users of a certain clearance level
-8 -- Add a user
-9 -- Remove a user
+1 -- Add a user
+2 -- View users of a certain clearance level
+3 -- Remove a user
+4 -- Add a course
+5 -- Change the status of a course
+6 -- View all courses
+7 -- Remove a course
+8 -- Assign a faculty to a course
+9 -- Remove a faculty from a course
 10 -- Add a student to a course
 11 -- Remove a student from a course
 12 -- Quit
