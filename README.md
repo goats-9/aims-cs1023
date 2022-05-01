@@ -27,12 +27,12 @@ Mini-AIMS uses a filesystem and various integrity checks to prevent data redunda
 
 ## User IDs, Course Codes and Passwords
 1. User IDs must be of the following templates:
-  a. Students: <Branch Abbreviation in Capitals><Last two digits of year of joining>BTECH<5-digit ID> (e.g. CS21BTECH11018)
-  b. Faculty: <Branch Abbreviation in Capitals><Last two digits of year of joining>_F<3-digit ID> (e.g. CS12_F002)
-  c. Admin: <Branch Abbreviation in Capitals><Last two digits of year of joining>_A<3-digit ID> (e.g. CS12_A002)
+a. Students: <Branch Abbreviation in Capitals><Last two digits of year of joining>BTECH<5-digit ID> (e.g. CS21BTECH11018)
+b. Faculty: <Branch Abbreviation in Capitals><Last two digits of year of joining>_F<3-digit ID> (e.g. CS12_F002)
+c. Admin: <Branch Abbreviation in Capitals><Last two digits of year of joining>_A<3-digit ID> (e.g. CS12_A002)
 2. Course codes must be a string of 6 characters, of the form <Branch Abbreviation>ABBC, where:
-  a. A denotes the year (from 1 to 5, for UG) when the course is offered.
-  b.
+a. A denotes the year (from 1 to 5, for UG) when the course is offered.
+b.
 The various functionalities that can be done by a student, faculty, or admin appear as a list each time you have to input a number for performing the operation.
 
 # Acknowledgements
