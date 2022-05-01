@@ -34,7 +34,7 @@ Mini-AIMS uses a filesystem and various integrity checks to prevent data redunda
 
   * Admin: <Branch Abbreviation in Capitals><Last two digits of year of joining>_A<3-digit ID> (e.g. CS12_A002)
 
-2. Course codes must be a string of 6 characters, of the form <Branch Abbreviation>ABBC, where A denotes the year (from 1 to 5, for UG) when the course is offered, BB denotes a unique 2-digit code for that course, C denotes the type of course as follows:
+2. Course codes must be a string of 6 characters, of the form <Branch Abbreviation>ABBC, where _A_ denotes the year (from 1 to 5, for UG) when the course is offered, _BB_ denotes a unique 2-digit code for that course, _C_ denotes the type of course as follows:
   
   Value of C | Type of Course
   :--------: | :------------:
