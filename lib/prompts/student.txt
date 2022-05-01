@@ -1,7 +1,0 @@
-Please enter the operation you want to perform as follows:
-0 -- Change password
-1 -- View Available Courses
-2 -- View Registered Courses
-3 -- Register for a Course
-4 -- Deregister from a Course
-5 -- Quit

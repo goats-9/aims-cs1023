@@ -1,4 +1,0 @@
-Enter the clearance level as follows:
-0 -- Student
-1 -- Faculty 
-2 -- Admin

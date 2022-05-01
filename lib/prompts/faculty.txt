@@ -1,6 +1,0 @@
-Please enter the operation you want to perform as follows:
-0 -- Change password
-1 -- View assigned courses
-2 -- Award grade to a student
-3 -- Submit course grades
-4 -- Quit
