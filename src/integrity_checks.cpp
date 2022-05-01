@@ -87,7 +87,7 @@ int isLegalID(string s, int cl) {
 	if (cl == -1) {
 		if (s.size() != 6) return 0;
 		if (find(dspln.begin(), dspln.end(), s.substr(0, 2)) == dspln.end()) return 0;
-		if (!(s[2] >= '1' && s[2] <= '4')) return 0;
+		if (!(s[2] >= '1' && s[2] <= '5')) return 0;
 		if (!isdigit(s[3]) || !isdigit(s[4])) return 0;
 		if (!(s[5] >= '0' && s[5] <= '6')) return 0;
 		return 1;
