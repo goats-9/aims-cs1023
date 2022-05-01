@@ -1,0 +1,5 @@
+Enter the course status as follows:
+0 -- Course not floated
+1 -- Course registration enabled
+2 -- Course registeration closed, classes commenced
+3 -- Course grades submitted
