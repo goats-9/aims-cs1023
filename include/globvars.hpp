@@ -2,7 +2,8 @@
 #ifndef _GLOBVARS_H_
 #define _GLOBVARS_H_
 #endif
-
+// For backtraces
+#define err_ret(A, M) fprintf(stderr, "[ERROR] %s:%d: " M "\n", __FILE__, __LINE__) 
 #include <bits/stdc++.h>
 using namespace std;
 
