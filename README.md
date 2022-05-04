@@ -32,7 +32,7 @@ Mini-AIMS uses a filesystem and various integrity checks to prevent data redunda
 
   * Faculty: \<Branch Abbreviation in Capitals\>\<Last two digits of year of joining\>\_F\<3-digit ID\> (e.g. CS12\_F002)
 
-  * Admin: AD\<Last two digits of year of joining\>\_A\<3-digit ID\> (e.g. AD12\_A002)
+  * Admin: AD\<Last two digits of year of joining\>\_\<4-digit ID\> (e.g. AD12\_0002)
 
 2. Course codes must be a string of 6 characters, of the form \<Branch Abbreviation\>ABBC, where _A_ denotes the year (from 1 to 5, for UG) when the course is offered, _BB_ denotes a unique 2-digit code for that course, _C_ denotes the type of course as follows:
   
