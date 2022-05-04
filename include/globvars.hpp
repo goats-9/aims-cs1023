@@ -4,6 +4,8 @@
 #endif
 // For backtraces
 #define err_ret(A, M) fprintf(stderr, "[ERROR] %s:%d: " M "\n", __FILE__, __LINE__) 
+#define err(A, M) if (!A) {fprintf(stderr, "[ERROR] " M "\n"); continue;}
+
 #include <bits/stdc++.h>
 using namespace std;
 
