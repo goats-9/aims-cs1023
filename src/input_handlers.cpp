@@ -30,8 +30,12 @@ string get_str(string prompt, int x) {
 	}
 	char ch;
 	while ((ch = getchar()) != '\n') {
-		if (ch == ' ') return "";
+		if (ch < 33 || ch > 126) s = "";
 		s += ch;
+	}
+	if (s == "") {
+		cout << "No input entered or bad input entered.\n";
+		s = get_str(prompt, x);
 	}
 	fflush(stdout);
 	return s;
