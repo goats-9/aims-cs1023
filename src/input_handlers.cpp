@@ -13,7 +13,6 @@ void dump(string path) {
 			break;
 		}
 	}
-	fflush(stdout);
 }
 
 // To return a string (using getline)
