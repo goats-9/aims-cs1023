@@ -27,7 +27,7 @@ string get_str(string prompt, int x) {
 	else {
 		cout << prompt;
 	}
-	char ch;
+	char ch = getchar();	// offload extraneous \n from integer inputs
 	while (s == "") {
 		while ((ch = getchar()) != '\n') {
 			if (ch < 33 || ch > 126) {
