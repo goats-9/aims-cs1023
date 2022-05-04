@@ -6,9 +6,13 @@ This program works only on Linux/macOS. It has been tested on Arch Linux and Ubu
 
 `$ git clone https://github.com/goats-9/aims-cs1023.git && cd aims-cs1023`
 
-Then, to install or reinstall, type
+Then, to install or cleanly reinstall, type
 
 `$ sh install.sh`
+
+Execute the portal by typing
+
+`$./aims`
 
 To reset the database only, type
 
