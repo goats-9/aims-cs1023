@@ -2,7 +2,6 @@
 #include "integrity_checks.hpp"
 #include "levels.hpp"
 #include "input_handlers.hpp"
-#define err(A, M) if (!A) {fprintf(stderr, "[ERROR] " M "\n"); continue;}
 
 // For dump text files
 string pd = "lib/prompts/", wel = "welcome.txt", adm = "admin.txt", clr = "cl.txt", cst = "course_stat.txt", ins = "faculty.txt", stu = "student.txt";
