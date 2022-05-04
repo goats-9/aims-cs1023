@@ -55,7 +55,6 @@ int get_int(string prompt, int x) {
 			cout << "Invalid integer input! ";
 			dump(prompt);
 			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			fflush(stdout);
 		}
 	}
