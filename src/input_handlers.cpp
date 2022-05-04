@@ -27,7 +27,6 @@ string get_str(string prompt, int x) {
 	if (x) dump(prompt);
 	else {
 		cout << prompt;
-		fflush(stdout);
 	}
 	char ch;
 	while (s == "") {
@@ -50,14 +49,11 @@ int get_int(string prompt, int x) {
 	else cout << prompt;
 	while (1) {
 		if (cin >> n) {
-			cin.ignore();
-			fflush(stdout);
 			return n;
 		} else {
 			cout << "Invalid integer input! ";
 			dump(prompt);
 			cin.clear();
-			fflush(stdout);
 		}
 	}
 }
