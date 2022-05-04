@@ -22,13 +22,17 @@ void dump(string path) {
 // x == 0 --> Message
 // else --> File path
 string get_str(string prompt, int x) {
-	string s;
+	string s = "";
 	if (x) dump(prompt);
 	else {
 		cout << prompt;
 		fflush(stdout);
 	}
-	getline(cin, s);
+	char ch;
+	while ((ch = getchar()) != '\n') {
+		if (ch == ' ') return "";
+		s += ch;
+	}
 	fflush(stdout);
 	return s;
 }
