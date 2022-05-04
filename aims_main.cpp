@@ -11,6 +11,7 @@ int main() {
 	while (noAdmins()) {
 		cout << "No Admin accounts detected!\nPlease create an admin account below.\n";
 		string u_init = get_str("Enter admin username: ", 0);
+		cout << u_init << "\n";
 		err(isLegalID(u_init, 2), "Illegal username entered.");
 		string p_init = get_str("Enter admin password: ", 0);
 		err(isLegalPwd(p_init), "Illegal password entered.");
