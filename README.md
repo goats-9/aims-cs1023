@@ -46,8 +46,15 @@ Mini-AIMS uses a filesystem and various integrity checks to prevent data redunda
   5          | Project/Thesis
   6          | Seminar
     
-## Functionality
+## Scope and Functionality
 This implementation of the student portal focusses on B.Tech courses for durations upto 5 years. The various functionalities that can be done by a student, faculty, or admin appear as a list each time you have to input a number for performing the operation.
+
+## Features
+1. Input handlers prevent hacking by safely flushing input stream `stdin` using `getchar`.
+2. Data integrity checks set in place to prevent accepting inputs not conforming to templates, and to prevent data repetition and/or redundancy, thereby enhancing data security.
+3. Data stored in as minimal a filesystem as possible, making it easy to port and use. Also facilitates views for members of all clearances.
+4. Random cryptosecure initial password generation, using `/dev/urandom`. Logins are not persistent, thereby enhancing security at the (minor) cost of convenience.
+5. Use of error messages as backtrace stacks 
 
 # Acknowledgements
 I would like to thank the course instructor Dr. M. V. Panduranga Rao, Faculty Advisor, Computer Science and Engineering, IIT Hyderabad, for giving me this wonderful opportunity to have a crack at learning the rudimentary principles of developing reliable, solid and secure software.
