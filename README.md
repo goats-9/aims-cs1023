@@ -34,7 +34,7 @@ Mini-AIMS uses a filesystem and various integrity checks to prevent data redunda
 
   * Students: \<Branch Abbreviation in Capitals\>\<Last two digits of year of joining\>BTECH\<5-digit ID\> (e.g. CS21BTECH11018)
 
-  * Faculty: \<Branch Abbreviation in Capitals\>\<Last two digits of year of joining\>\_F\<3-digit ID\> (e.g. CS12\_F002)
+  * Faculty: \<Branch Abbreviation in Capitals\>\<Last two digits of year of joining\>\F\<3-digit ID\> (e.g. CS12F002)
 
   * Admin: AD\<Last two digits of year of joining\>\<3-digit ID\> (e.g. AD12002)
 2. The accepted branches for the above templates are:
