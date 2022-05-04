@@ -27,7 +27,8 @@ int main() {
 	string u = get_str("Username: ", 0);
 	string p = get_str("Password: ", 0);
 	while (!isUser(u, l) || !pass(p, u, l)) {
-		u = get_str("Username or password is incorrect!\nUsername: ", 0);
+		cout << "Username or password is incorrect!\n";
+		u = get_str("Username: ", 0);
 		p = get_str("Password: ", 0);
 	}
 	cout << "\nWelcome " << u << "!\n";
