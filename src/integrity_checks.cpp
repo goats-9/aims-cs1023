@@ -106,7 +106,7 @@ int isLegalID(string s, int cl) {
 		for (int i = 6; i < 9; i++) if (!isdigit(s[i])) return 0;
 		return 1;
 	} else if (cl == 2) {
-		if (s.size() != 9) return 0;
+		if (s.size() != 7) return 0;
 		if (s.substr(0, 2) != "AD") return 0;
 		for (int i = 2; i < 7; i++) if (!isdigit(s[i])) return 0;
 		return 1;
