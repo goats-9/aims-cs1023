@@ -22,6 +22,7 @@ void dump(string path) {
 // x == 0 --> Message
 // else --> File path
 string get_str(string prompt, int x) {
+	int lck = 0;	// facilitate flushing
 	string s = "";
 	if (x) dump(prompt);
 	else {
@@ -33,13 +34,12 @@ string get_str(string prompt, int x) {
 		while ((ch = getchar()) != '\n') {
 			if (ch < 33 || ch > 126) {
 				s = "";
-				break;
+				lck = 1;
 			}
-			s += ch;
+			if (!lck) s += ch;
 		}
 		if (s == "") cout << "No input or bad input.\n" << prompt;
 	}
-	fflush(stdout);
 	return s;
 }
 
