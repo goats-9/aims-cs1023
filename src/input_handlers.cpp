@@ -29,13 +29,15 @@ string get_str(string prompt, int x) {
 		fflush(stdout);
 	}
 	char ch;
-	while ((ch = getchar()) != '\n') {
-		if (ch < 33 || ch > 126) s = "";
-		s += ch;
-	}
-	if (s == "") {
-		cout << "No input entered or bad input entered.\n";
-		s = get_str(prompt, x);
+	while (s == "") {
+		while ((ch = getchar()) != '\n') {
+			if (ch < 33 || ch > 126) {
+				s = "";
+				break;
+			}
+			s += ch;
+		}
+		if (s == "") cout << "No input or bad input.\n" << prompt;
 	}
 	fflush(stdout);
 	return s;
