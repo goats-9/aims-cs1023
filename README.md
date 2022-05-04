@@ -75,4 +75,6 @@ This implementation of the student portal focusses on B.Tech courses for duratio
 5. Use of error messages as backtrace stacks 
 
 # Acknowledgements
+Massive thank you to my elder brother for patiently testing out the portal and providing valuable feedback to improve the user experience.
+
 I would like to thank the course instructor Dr. M. V. Panduranga Rao, Faculty Advisor, Computer Science and Engineering, IIT Hyderabad, for giving me this wonderful opportunity to have a crack at learning the rudimentary principles of developing reliable, solid and secure software.
