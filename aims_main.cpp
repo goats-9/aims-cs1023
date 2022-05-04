@@ -2,7 +2,7 @@
 #include "integrity_checks.hpp"
 #include "levels.hpp"
 #include "input_handlers.hpp"
-#define err(A, M) if (!A) {fprintf(stderr, M "\n"); continue;}
+#define err(A, M) if (!A) {fprintf(stderr, "[ERROR] " M "\n"); continue;}
 
 // For dump text files
 string pd = "lib/prompts/", wel = "welcome.txt", adm = "admin.txt", clr = "cl.txt", cst = "course_stat.txt", ins = "faculty.txt", stu = "student.txt";
@@ -10,9 +10,9 @@ string pd = "lib/prompts/", wel = "welcome.txt", adm = "admin.txt", clr = "cl.tx
 int main() {
 	while (noAdmins()) {
 		cout << "No Admin accounts detected!\nPlease create an admin account below.\n";
-		string u_init = get_str("Enter admin username: ", 0);
+		string u_init = get_str("Enter admin username.\nAdmin usernames are of the form AD<Last two digits of year of joining><3-digit ID> (e.g. AD12002).\n", 0);
 		err(isLegalID(u_init, 2), "Illegal username entered.");
-		string p_init = get_str("Enter admin password: ", 0);
+		string p_init = get_str("Enter admin password (must be at least 8 printable characters with ASCII values between 33 and 126, both inclusive)\n", 0);
 		err(isLegalPwd(p_init), "Illegal password entered.");
 		Admin ad_init(u_init, p_init, 2);
 		ad_init.addUser(u_init, p_init, 2);
@@ -39,7 +39,7 @@ int main() {
 			op = get_int(pd + stu, 1);
 			if (op < 0 || op > 5) cout << "Undefined operation. ";
 			if (op == 0) {
-				string p = get_str("Enter new password: ", 0);
+				string p = get_str("Enter new password (must be at least 8 printable characters with ASCII values between 33 and 126, both inclusive)\n", 0);
 				err(isLegalPwd(p), "Entered password is invalid.");
 				S.passwd(p);
 			} else if (op == 1) S.viewAllCourses();
@@ -64,7 +64,7 @@ int main() {
 			op = get_int(pd + ins, 1);
 			if (op < 0 || op > 4) cout << "Undefined operation. ";
 			else if (op == 0) {
-				string p = get_str("Enter new password (more than 10 characters, no spaces): ", 0);
+				string p = get_str("Enter new password (must be at least 8 printable characters with ASCII values between 33 and 126, both inclusive)\n", 0);
 				err(isLegalPwd(p), "Entered password is invalid.");
 				F.passwd(p);
 			} else if (op == 1) F.viewCourses();
@@ -91,7 +91,7 @@ int main() {
 			op = get_int(pd + adm, 1);
 			if (op < 0 || op > 12) cout << "Undefined operation. ";
 			else if (op == 0) {
-				string p = get_str("Enter new password: ", 0);
+				string p = get_str("Enter new password (must be at least 8 printable characters with ASCII values between 33 and 126, both inclusive)\n", 0);
 				err(isLegalPwd(p), "Entered password is invalid.");
 				A.passwd(p);
 			} else if (op == 8) {
@@ -110,7 +110,7 @@ int main() {
 				err(isAssigned(f_id, c_id), "Faculty is not assigned to this course.");
 				A.removeFaculty(f_id, c_id);
 			} else if (op == 4) {
-				string cc = get_str("Enter course code: ", 0);
+				string cc = get_str("Enter course code. Course codes must be a string of 6 characters, of the form <Branch Abbreviation>ABBC, where A denotes the year (from 1 to 5, for UG) when the course is offered, BB denotes a unique 2-digit code for that course, and C is a digit between 0 and 6 (both inclusive) depending on the type of course.\n", 0);
 				err(!isCourse(cc), "Course already exists.");
 				err(isLegalID(cc, -1), "Illegal course ID entered.");
 				int a = get_int("Enter total course strength: ", 0);
@@ -144,6 +144,9 @@ int main() {
 			} else if (op == 1) {
 				int cl = get_int(pd + clr, 1);
 				err((cl >= 0 && cl <= 2), "Entered clearence level is invalid.");
+				if (cl == 0) cout << "Student IDs are of the form <Two-letter branch abbreviation in capitals><Last two digits of year of joining>BTECH<5-digit ID> (e.g. CS21BTECH11018).\n";
+				else if (cl == 1) cout << "Faculty IDs are of the form <Two-letter branch abbreviation in capitals><Last two digits of year of joining>F<3-digit ID> (e.g. CS12F002).\n";
+				else cout << "Admin IDs are of the form AD<Last two digits of year of joining><3-digit ID> (e.g. AD12002).\n";
 				string uid = get_str("Enter ID of new user: ", 0);
 				err(!isUser(uid, cl), "User already exists.");
 				err(isLegalID(uid, cl), "Entered user ID is illegal.");
