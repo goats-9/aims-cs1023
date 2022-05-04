@@ -83,7 +83,7 @@ int isLegalPwd(string s) {
 
 // To check if the username or coursename (cl == -1) entered is legal
 int isLegalID(string s, int cl) {
-	vector<string> dspln = {"AI", "BM", "BT", "CE", "CS", "EE", "ES", "ME", "MA"};
+	vector<string> dspln = {"AI", "BM", "BT", "CE", "CS", "EE", "ES", "ME", "MA", "LA", "PH", "MS", "BD", "CH"};
 	if (cl == -1) {
 		if (s.size() != 6) return 0;
 		if (find(dspln.begin(), dspln.end(), s.substr(0, 2)) == dspln.end()) return 0;
