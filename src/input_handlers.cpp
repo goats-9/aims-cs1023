@@ -44,11 +44,13 @@ int get_int(string prompt, int x) {
 	if (x) dump(prompt);
 	else cout << prompt;
 	while (1) {
-		if (cin >> n) return n;
-		else {
+		if (cin >> n) {
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');	/// Clean up newlines
+			return n;
+		} else {
 			cout << "Invalid integer input! ";
 			dump(prompt);
-			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 	}
 }
