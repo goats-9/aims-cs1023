@@ -3,6 +3,8 @@
 #define _INTEGRITY_CHECKS_H_
 #endif
 
+#include "globvars.hpp"
+
 int pass(string, string, int);
 int isUser(string, int);
 int isAssigned(string, string);
