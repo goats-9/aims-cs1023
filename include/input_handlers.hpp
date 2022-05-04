@@ -2,7 +2,7 @@
 #ifndef _INPUT_HANDLERS_HPP_
 #define _INPUT_HANDLERS_HPP_
 #endif
-#define err(A, M) if (!A) {fprintf(stderr, M "\n"); continue;}
+#include "globvars.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 
