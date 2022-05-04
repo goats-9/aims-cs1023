@@ -24,6 +24,7 @@ int nDigits(int n) {
 
 void Course::print_entry() {
 	fstream fs(c_txt, ios::app);
+	err_ret(fs, "File %s failed to open", c_txt);
 	fs << code << " " << cur_str << " " << strength << " " << status << " " << sem  << " " << st_seg << " " << end_seg << "\n";
 	fs.close();
 }
