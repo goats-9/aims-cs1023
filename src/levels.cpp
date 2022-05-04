@@ -165,10 +165,10 @@ int Admin::addUser(string id, string pw, int cl) {
 	string fpath = b + (!cl ? s : (cl == 1 ? f : a)) + p + id + ext;
 	string mpath = !cl ? st : (cl == 1 ? fa : ad);
 	fstream file;
-	file.open(fpath, ios_base::out|ios_base::trunc);
+	file.open(fpath, ios::out|ios::trunc);
 	file << pw << "\n";
 	file.close();
-	fstream mfile(mpath, ios_base::app);
+	fstream mfile(mpath, ios::app);
 	mfile << id << "\n";
 	mfile.close();
 	return 0;
