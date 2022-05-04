@@ -37,8 +37,22 @@ Mini-AIMS uses a filesystem and various integrity checks to prevent data redunda
   * Faculty: \<Branch Abbreviation in Capitals\>\<Last two digits of year of joining\>\_F\<3-digit ID\> (e.g. CS12\_F002)
 
   * Admin: AD\<Last two digits of year of joining\>\<3-digit ID\> (e.g. AD12002)
-
-2. Course codes must be a string of 6 characters, of the form \<Branch Abbreviation\>ABBC, where _A_ denotes the year (from 1 to 5, for UG) when the course is offered, _BB_ denotes a unique 2-digit code for that course, _C_ denotes the type of course as follows:
+2. The accepted branches for the above templates are:
+  * `AI`: Artificial Intelligence
+  * `BD`: Design
+  * `BM`: Biomedical Engineering
+  * `BT`: Biotechnology
+  * `CE`: Chemical Engineering
+  * `CH`: Chemistry
+  * `CS`: Computer Science
+  * `EE`: Electrical Engineering
+  * `ES`: Environmental Sciences
+  * `LA`: Liberal Arts
+  * `MA`: Mathematics
+  * `ME`: Mechanical and Aerosapce Engineering
+  * `MS`: Materials Science and Metallurgical Engineering
+  * `PH`: Physics
+3. Course codes must be a string of 6 characters, of the form \<Branch Abbreviation\>ABBC, where _A_ denotes the year (from 1 to 5, for UG) when the course is offered, _BB_ denotes a unique 2-digit code for that course, _C_ denotes the type of course as follows:
   
   Value of C | Type of Course
   :--------: | :------------:
@@ -57,7 +71,7 @@ This implementation of the student portal focusses on B.Tech courses for duratio
 1. Input handlers prevent hacking by safely flushing input stream `stdin` using `getchar`.
 2. Data integrity checks set in place to prevent accepting inputs not conforming to templates, and to prevent data repetition and/or redundancy, thereby enhancing data security.
 3. Data stored in as minimal a filesystem as possible, making it easy to port and use. Also facilitates views for members of all clearances.
-4. Random cryptosecure initial password generation, using `/dev/urandom`. Logins are not persistent, thereby enhancing security at the (minor) cost of convenience.
+4. Random cryptosecure initial password generation, using `/dev/urandom`. Logins are not persistent, thereby enhancing security at the (minor) cost of convenience. **Note that any password has to be of length at least 8 characters.**
 5. Use of error messages as backtrace stacks 
 
 # Acknowledgements
