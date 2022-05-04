@@ -24,20 +24,17 @@ string get_str(string prompt, int x) {
 	int lck = 0;	// facilitate flushing
 	string s = "";
 	if (x) dump(prompt);
-	else {
-		cout << prompt;
-	}
-	char ch = getchar();	// offload extraneous \n from integer inputs
-	while (s == "") {
-		while ((ch = getchar()) != '\n') {
+	else cout << prompt;
+	char ch;
+	while ((ch = getchar()) != '\n') {
+		if (!lck) {
 			if (ch < 33 || ch > 126) {
 				s = "";
 				lck = 1;
-			}
-			if (!lck) s += ch;
+			} else s += ch;
 		}
-		if (s == "") cout << "No input or bad input.\n" << prompt;
 	}
+	if (s == "") cout << "No input or bad input.\n" << prompt;
 	return s;
 }
 
@@ -47,9 +44,8 @@ int get_int(string prompt, int x) {
 	if (x) dump(prompt);
 	else cout << prompt;
 	while (1) {
-		if (cin >> n) {
-			return n;
-		} else {
+		if (cin >> n) return n;
+		else {
 			cout << "Invalid integer input! ";
 			dump(prompt);
 			cin.clear();
