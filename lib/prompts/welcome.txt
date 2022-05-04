@@ -10,4 +10,4 @@
 ---------------------------------------------------------------------
 =====================================================================
 
-Welcome to the AIMS Portal!
+Welcome to the AIMS Portal! For documentation please head over to https://github.com/goats-9/aims-cs1023
