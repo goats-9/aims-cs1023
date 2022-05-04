@@ -160,10 +160,15 @@ int main() {
 				err(isUser(s, 0), "Student does not exist.");
 				string c = get_str("Enter course code: ", 0);
 				err(isCourse(c), "Course does not exist.");
+				cout << "Check 1 done\n";
 				err(!isEnrolled(s, c), "Student is already enrolled in this course.");
+				cout << "Check 2 done\n";
 				err((getStatus(c) == 1), "Course registration not enabled.");
+				cout << "Check 3 done\n";
 				err(!isFull(c), "All slots filled.");
+				cout << "Check 4 done\n";
 				A.addStudent(s, c);
+				cout << "Added " << s << " to course " << c << " successfully.\n";
 			} else if (op == 11) {
 				string s = get_str("Enter ID of student: ", 0);
 				err(isUser(s, 0), "Student does not exist.");
