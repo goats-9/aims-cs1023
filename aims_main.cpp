@@ -11,7 +11,6 @@ int main() {
 	while (noAdmins()) {
 		cout << "No Admin accounts detected!\nPlease create an admin account below.\n";
 		string u_init = get_str("Enter admin username: ", 0);
-		cout << u_init << "\n";
 		err(isLegalID(u_init, 2), "Illegal username entered.");
 		string p_init = get_str("Enter admin password: ", 0);
 		err(isLegalPwd(p_init), "Illegal password entered.");
@@ -160,7 +159,6 @@ int main() {
 				string s = get_str("Enter ID of student: ", 0);
 				err(isUser(s, 0), "Student does not exist.");
 				string c = get_str("Enter course code: ", 0);
-				cout << c << "\n";
 				err(isCourse(c), "Course does not exist.");
 				err(!isEnrolled(s, c), "Student is already enrolled in this course.");
 				err((getStatus(c) == 1), "Course registration not enabled.");
