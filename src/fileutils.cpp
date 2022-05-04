@@ -252,19 +252,6 @@ void delUsr(string uniq, int cl) {
 	rename(pl.c_str(), f.c_str());
 }
 
-/* MISCELLANEOUS UTILITIES */
-
-// To generate a random password
-string gen() {
-	uniform_int_distribution<int> len(8, 16);
-	uniform_int_distribution<int> pool(33, 126);
-	random_device rd;
-	int n = len(rd);
-	string s = "";
-	for (int i = 0; i < n; i++) s += (char) pool(rd);
-	return s;
-}
-
 // To check the status of a course given its code
 int getStatus(string code) {
 	fstream f(c_txt, ios::in);
@@ -276,8 +263,20 @@ int getStatus(string code) {
 			return c;
 		} else {
 			getline(f, s);
-			cin.ignore();
 		}
 	}
 	return 0;
+}
+
+/* MISCELLANEOUS UTILITIES */
+
+// To generate a random password
+string gen() {
+	uniform_int_distribution<int> len(8, 16);
+	uniform_int_distribution<int> pool(33, 126);
+	random_device rd;
+	int n = len(rd);
+	string s = "";
+	for (int i = 0; i < n; i++) s += (char) pool(rd);
+	return s;
 }
