@@ -1,5 +1,5 @@
-#include "globvars.hpp"
 #include "integrity_checks.hpp"
+
 /* DATA INTEGREITY CHECKING UTILTITIES */
 
 // To check whether a user already exists
