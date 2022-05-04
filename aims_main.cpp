@@ -159,7 +159,6 @@ int main() {
 				string s = get_str("Enter ID of student: ", 0);
 				err(isUser(s, 0), "Student does not exist.");
 				string c = get_str("Enter course code: ", 0);
-				cout << c << endl;
 				err(isCourse(c), "Course does not exist.");
 				err(!isEnrolled(s, c), "Student is already enrolled in this course.");
 				err((getStatus(c) == 1), "Course registration not enabled.");
