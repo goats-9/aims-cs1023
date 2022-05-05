@@ -54,9 +54,8 @@ error:
 int editStrength(string id, int delta) {
 	string c_id, line;
 	int n;
-	fstream f1(c_txt, ios::in);
+	fstream f1(c_txt, ios::in), f2(pl, ios::out|ios::app);
 	err_open(f1, c_txt);
-	fstream f2(pl, ios::out|ios::app);
 	err_open(f2, pl);
 	while (f1 >> c_id) {
 		if (c_id == id) {
@@ -82,10 +81,8 @@ error:
 // To update the grade of the student in lib/students/courses/
 int updGrade_st(string file, string c_id, string grade) {
 	string a, b;
-	fstream x, y;
-	x.open(file, ios::in);
+	fstream x(file, ios::in), y(pl, ios::out);
 	err_open(x, file);
-	y.open(pl, ios::out);
 	err_open(y, pl);
 	while (x >> a >> b) {
 		if (a == c_id) y << a << " " << grade << "\n";
@@ -106,10 +103,8 @@ error:
 int updGrade_cr(string file, string st_id, string grade) {
 	int n;
 	string a, b;
-	fstream x, y;
-	x.open(file, ios::in);
+	fstream x(file, ios::in), y(pl, ios::out|ios::app);
 	err_open(x, file);
-	y.open(pl, ios::out|ios::app);
 	err_open(y, pl);
 	x >> n;
 	y << n << "\n";
@@ -134,12 +129,10 @@ error:
 	
 // To update the status of a course in lib/coursedata/courses.txt
 int updStatus(string code, int stat) {
-	fstream x, y;
+	fstream x(c_txt, ios::in), y(pl, ios::out|ios::app);
 	string s;
 	int p, q, r;
-	x.open(c_txt, ios::in);
 	err_open(x, c_txt);
-	y.open(pl, ios::out|ios::app);
 	err_open(y, pl);
 	while (x >> s) {
 		y << s;
@@ -166,12 +159,10 @@ error:
 
 // To add faculty for this course in lib/coursedata
 int addFac(string path, string fac_id) {
-	fstream x, y;
+	fstream x(path, ios::in), y(pl, ios::out|ios::app);
 	string s;
 	int n;
-	x.open(path, ios::in);
 	err_open(x, path);
-	y.open(pl, ios::out|ios::app);
 	err_open(y, pl);
 	x >> n;
 	y << n + 1 << "\n";
@@ -200,12 +191,10 @@ error:
 
 // To remove faculty for this course in lib/coursedata
 int rmFac(string path, string fac_id) {
-	fstream x, y;
+	fstream x(path, ios::in), y(pl, ios::out);
 	string s1, s2;
 	int n;
-	x.open(path, ios::in);
 	err_open(x, path);
-	y.open(pl, ios::out);
 	err_open(y, pl);
 	x >> n;
 	y << n - 1 << "\n";
@@ -226,8 +215,7 @@ error:
 
 // Overload previous utility to remove the faculty from all courses they are a part of
 int rmFac(string id) {
-	string cpath = b + f + c + id + ext;
-	string c_id;
+	string cpath = b + f + c + id + ext, c_id;
 	fstream x(cpath, ios::in);
 	err_open(x, cpath);
 	while (x >> c_id) {
@@ -244,11 +232,9 @@ error:
 
 // To remove a course from the file in lib/faculty/courses and lib/student/courses
 int rmCourse(string path, string c_id) {
-	fstream x, y;
+	fstream x(path, ios::in), y(pl, ios::out);
 	string s, t;
-	x.open(path, ios::in);
 	err_open(x, path);
-	y.open(pl, ios::out);
 	err_open(y, pl);
 	while(getline(x, s)) {
 		if (s.substr(0, 6) != c_id) y << s << "\n";
@@ -269,10 +255,9 @@ error:
 // Overload previous utility to remove the course from the filesystem completely
 int rmCourse(string c_id) {
 	string fpath = b + d + c_id + ext;
-	fstream x, y, z;
+	fstream x(fpath, ios::in), y(c_txt, ios::in), z(pl, ios::out);
 	string s1, s2, fac_path, st_path;
 	int n;
-	x.open(fpath, ios::in);
 	err_open(x, fpath);
 	x >> n;
 	for (int i = 0; i < n; i++) {
@@ -285,9 +270,7 @@ int rmCourse(string c_id) {
 		err_ret((rmCourse(st_path.c_str(), c_id) == 0), "Failed to remove course %s from student records.", c_id.c_str());
 	}
 	x.close();
-	y.open(c_txt, ios::in);
 	err_open(y, c_txt);
-	z.open(pl, ios::out);
 	err_open(z, pl);
 	while (getline(y, s1)) {
 		if (s1.substr(0, 6) != c_id) z << s1;
@@ -310,14 +293,13 @@ error:
 
 // To remove a user from the users lists in lib
 int delUsr(string uniq, int cl) {
-	fstream x, y;
+	fstream x, y(pl, ios::out);
 	string f, s;
 	if (cl == 2) f = ad;
 	else if (cl == 1) f = fa;
 	else if (cl == 0) f = st;
 	x.open(f, ios::in);
 	err_open(x, f);
-	y.open(pl, ios::out);
 	err_open(y, pl);
 	while (x >> s) if (s != uniq) y << s << "\n";
 	x.close();
