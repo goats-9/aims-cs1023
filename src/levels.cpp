@@ -18,17 +18,19 @@ int nDigits(int n) {
 		++ctr;
 		n /= 10;
 	}
-	return max(ctr, 1);
+	return max(ctr, 1);	// Exception for n = 0 handled here
 }
 
 
 int Course::print_entry() {
 	fstream cf(c_txt, ios::app);
-	cf.exceptions(ifstream::badbit);
 	err_open(cf, c_txt);
 	cf << code << " " << cur_str << " " << strength << " " << status << " " << sem  << " " << st_seg << " " << end_seg << "\n";
 	cf.close();
 	return 0;
+error:
+	if (cf.is_open()) cf.close();
+	return -1;
 }
 
 User::User(string uniq, string pass, int cl) {
@@ -46,19 +48,24 @@ int User::passwd(string s) {
 	secret = s;
 	file.close();
 	return 0;
+error:
+	if (file.is_open()) file.close();
+	return -1;
 }
 
 int Student::viewAllCourses() {
 	fstream file(c_txt, ios::in);
+	err_open(file, c_txt);
 	string s;
 	int x1, x2, x3, x4, x5, x6;
-	err_open(file, c_txt);
 	cout << "COURSE     NO_REG    NO_AVAL    STATUS    SEMESTER    SEGMENT\n------     ------    -------    ------    --------    -------\n";
 	while (file >> s >> x1 >> x2 >> x3 >> x4 >> x5 >> x6) {
 		cout << s << string(6, ' ') << string(3 - nDigits(x1), '0') << x1 << string(8, ' ') << string(3 - nDigits(x2), '0') << x2 <<string(8, ' ') << x3 << string(10, ' ') << x4 << string(10, ' ') << x5 << "-" << x6 <<  "\n";
 	}
-	
 	return 0;
+error:
+	if (file.is_open()) file.close();
+	return -1;
 }
 
 int Student::viewRegCourses() {
@@ -75,6 +82,9 @@ int Student::viewRegCourses() {
 	}
 	file.close();
 	return 0;
+error:
+	if (file.is_open()) file.close();
+	return -1;
 }
 
 int Student::regCourse(string code) {
@@ -91,6 +101,10 @@ int Student::regCourse(string code) {
 	cfile.close();
 	err_ret((editStrength(code, 1) == 0), "Failed to edit course strength.");
 	return 0;
+error:
+	if (file.is_open()) file.close();
+	if (cfile.is_open()) cfile.close();
+	return -1;
 }
 
 int Student::deregCourse(string code) {
@@ -101,6 +115,8 @@ int Student::deregCourse(string code) {
 	err_ret((delStudent(cpath, x) == 0), "Failed to delete course from student records.");
 	err_ret((editStrength(code, -1) == 0), "Failed to edit course strength.");
 	return 0;
+error:
+	return -1;
 }
 
 int Faculty::viewCourses() {
@@ -108,7 +124,7 @@ int Faculty::viewCourses() {
 	string fpath = b + f + c + x + ext;
 	fstream file(fpath, ios::in);
 	string s;
-	err_open(cfile, cpath);
+	err_open(file, fpath);
 	while (getline(file, s)) {
 		cout << s << "\n";
 		if (file.eof()) {
@@ -117,6 +133,9 @@ int Faculty::viewCourses() {
 		}
 	}
 	return 0;
+error:
+	if (file.is_open()) file.close();
+	return -1;
 }
 
 int Faculty::allotGrade(string c_id, string st_id, string grade) {
@@ -125,6 +144,8 @@ int Faculty::allotGrade(string c_id, string st_id, string grade) {
 	err_ret((updGrade_st(fpath1, c_id, grade) == 0), "Failed to update grade of student in student records.");
 	err_ret((updGrade_cr(fpath2, st_id, grade) = 0), "Failed to update grade of student in course records.");
 	return 0;
+error:
+	return -1;
 }
 
 int Faculty::submitGrades(string code) {
@@ -133,6 +154,8 @@ int Faculty::submitGrades(string code) {
 	rename(fpath1.c_str(), fpath2.c_str());
 	err_ret((updStatus(code, 3) == 0), "Failed to update course status after grade submission.");
 	return 0;
+error:
+	return -1;
 }
 
 int Admin::assignFaculty(string fac_id, string c_id) {
@@ -144,6 +167,9 @@ int Admin::assignFaculty(string fac_id, string c_id) {
 	x.close();
 	err_ret((addFac(fpath1, fac_id) == 0), "Failed to add faculty in course records.");
 	return 0;
+error:
+	if (x.is_open()) x.close();
+	return -1;
 }
 
 int Admin::removeFaculty(string fac_id, string c_id) {
@@ -152,45 +178,61 @@ int Admin::removeFaculty(string fac_id, string c_id) {
 	err_ret((rmFac(fpath1, fac_id) == 0), "Failed to remove faculty from course records.");
 	err_ret((rmCourse(fpath2, c_id) == 0), "Failed to remove course from faculty records.");
 	return 0;
+error:
+	return -1;
 }
 
 int Admin::addCourse(Course cr, string fac_id) {
+	fstream cfile, fac;
 	err_ret((cr.print_entry() == 0), "Failed to add course entry to course records.");
 	string cfpath = b + d + cr.getCode() + ext;
-	fstream cfile(cfpath, ios::app);
+	cfile.open(cfpath, ios::app);
 	err_open(cfile, cfpath);
 	cfile << "1\n" << fac_id << "\n";
 	cfile.close();
 	string facpath = b + f + c + fac_id + ext;
-	fstream fac(facpath, ios::app);
+	fac.open(facpath, ios::app);
 	err_open(fac, facpath);
 	fac << cr.getCode() << "\n";
 	fac.close();
 	return 0;
+error:
+	if (cfile.is_open()) cfile.close();
+	if (fac.is_open()) fac.close();
+	return -1;
 }
 
 int Admin::updateCourseStatus(string code, int stat) { 
 	err_ret((updStatus(code, stat) == 0), "Failed to update course status.");
 	return 0;
+error:
+	return -1;
 }
 
 int Admin::removeCourse(string c_id) {
 	err_ret((rmCourse(c_id) == 0), "Failed to remove course from records completely.");
 	return 0;
+error:
+	return -1;
 }
 
 int Admin::addUser(string id, string pw, int cl) { 
+	fstream file, mfile;
 	string fpath = b + (!cl ? s : (cl == 1 ? f : a)) + p + id + ext;
 	string mpath = !cl ? st : (cl == 1 ? fa : ad);
-	fstream file(fpath, ios::out|ios::trunc);
+	file.open(fpath, ios::out|ios::trunc);
 	err_open(file, fpath);
 	file << pw << "\n";
 	file.close();
-	fstream mfile(mpath, ios::app);
+	mfile.open(mpath, ios::app);
 	err_open(mfile, fmpath);
 	mfile << id << "\n";
 	mfile.close();
 	return 0;
+error:
+	if (file.is_open()) file.close();
+	if (mfile.is_open()) mfile.close();
+	return -1;
 }
 
 int Admin::removeUser(string uniq, int cl) {
@@ -203,21 +245,28 @@ int Admin::removeUser(string uniq, int cl) {
 	}
 	err_ret((delUsr(uniq, cl) == 0), "Failed to delete user from records completely.");
 	return 0;
+error:
+	return -1;
 }
 
 int Admin::addStudent(string st_id, string c_id) {
+	fstream file, sf;
 	string afile = b + d + c_id + ext;
-	fstream file(afile, ios::out|ios::app);
+	file.open(afile, ios::out|ios::app);
 	err_open(file, afile);
 	file << st_id << " NA\n";
 	file.close();
 	string sfile = b + s + c + st_id + ext;
-	fstream sf(sfile, ios::out|ios::app);
+	sf.open(sfile, ios::out|ios::app);
 	err_open(sf, sfile);
 	sf << c_id << " NA\n";
 	sf.close();
 	err_ret((editStrength(c_id, 1) == 0), "Failed to edit course strength.");
 	return 0;
+error:
+	if (file.is_open()) file.close();
+	if (sf.is_open()) sf.close();
+	return -1;
 }
 
 int Admin::removeStudent(string st_id, string c_id) {
@@ -227,4 +276,6 @@ int Admin::removeStudent(string st_id, string c_id) {
 	err_ret((delCourse(spath, c_id) == 0), "Failed to delete course from course records.");
 	err_ret((editStrength(c_id, -1) == 0), "Failed to edit course strength.");
 	return 0;
+error:
+	return -1;
 }
