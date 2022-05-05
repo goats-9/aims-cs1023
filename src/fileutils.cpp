@@ -4,21 +4,23 @@ using namespace std;
 
 /* FILESYSTEM MANIPULATION UTILITIES */
 
-// To remove the course from the text file in bin/students/courses/
-void delCourse(string file, string code) {
-	fstream x, y;
-	x.open(file, ios::in);
-	y.open(pl, ios::out);
+// To remove the course from the text file in lib/students/courses/
+int delCourse(string file, string code) {
+	fstream x(file, ios::in);
+	err_open(x, file);
+	fstream y(pl, ios::out);
+	err_open(y, pl);
 	string s1, s2;
 	while (x >> s1 >> s2) if (s1 != code) y << s1 << " " << s2 <<  "\n";
 	x.close();
 	y.close();
 	remove(file.c_str());
 	rename(pl.c_str(), file.c_str());
+	return 0;
 }
 
-// To remove the student from the text file in bin/coursedata
-void delStudent(string file, string st_id) {
+// To remove the student from the text file in lib/coursedata
+int delStudent(string file, string st_id) {
 	fstream x, y;
 	x.open(file, ios::in);
 	y.open(pl, ios::out);
@@ -38,11 +40,12 @@ void delStudent(string file, string st_id) {
 }
 
 // To change the current course strength
-void editStrength(string id, int delta) {
-	fstream f1, f2;
-	f1.open(c_txt, ios::in);
-	f2.open(pl, ios::out|ios::app);
+int editStrength(string id, int delta) {
 	string c_id, line;
+	fstream f1(c_txt, ios::in);
+	err_open(f1, c_txt);
+	fstream f2(pl, ios::out|ios::app);
+	err_open(f2, pl);
 	int n;
 	while (f1 >> c_id) {
 		if (c_id == id) {
@@ -60,10 +63,12 @@ void editStrength(string id, int delta) {
 	rename(pl.c_str(), c_txt.c_str());
 }
 
-// To update the grade of the student in bin/students/courses/
+// To update the grade of the student in lib/students/courses/
 void updGrade_st(string file, string c_id, string grade) {
 	fstream x(file, ios::in);
+	err_open(x, file);
 	fstream y(pl, ios::out);
+	err_open(y, pl);
 	string a, b;
 	while (x >> a >> b) {
 		if (a == c_id) y << a << " " << grade << "\n";
@@ -75,10 +80,12 @@ void updGrade_st(string file, string c_id, string grade) {
 	rename(pl.c_str(), file.c_str());
 }
 
-// To update the grade of the student in bin/coursedata
-void updGrade_cr(string file, string st_id, string grade) {
+// To update the grade of the student in lib/coursedata
+int updGrade_cr(string file, string st_id, string grade) {
 	fstream x(file, ios::in);
+	err_open(x, file);
 	fstream y(pl, ios::out|ios::app);
+	err_open(y, pl);
 	int n;
 	string a, b;
 	x >> n;
@@ -97,11 +104,12 @@ void updGrade_cr(string file, string st_id, string grade) {
 	rename(pl.c_str(), file.c_str());
 }
 	
-// To update the status of a course in bin/coursedata/courses.txt
-void updStatus(string code, int stat) {
-	fstream x, y;
-	x.open(c_txt, ios::in);
-	y.open(pl, ios::out|ios::app);
+// To update the status of a course in lib/coursedata/courses.txt
+int updStatus(string code, int stat) {
+	fstream x(c_txt, ios::in);
+	err_open(x, c_txt);
+	fstream y(pl, ios::out|ios::app);
+	err_open(y, pl);
 	string s;
 	int p, q, r;
 	while (x >> s) {
@@ -122,11 +130,12 @@ void updStatus(string code, int stat) {
 	rename(pl.c_str(), c_txt.c_str());
 }
 
-// To add faculty for this course in bin/coursedata
+// To add faculty for this course in lib/coursedata
 void addFac(string path, string fac_id) {
-	fstream x, y;
-	x.open(path, ios::in);
-	y.open(pl, ios::out|ios::app);
+	fstream x(path, ios::in);
+	err_open(x, path);
+	fstream y(pl, ios::out|ios::app);
+	err_open(y, pl);
 	string s;
 	int n;
 	x >> n;
@@ -149,11 +158,12 @@ void addFac(string path, string fac_id) {
 	rename(pl.c_str(), path.c_str());
 }
 
-// To remove faculty for this course in bin/coursedata
-void rmFac(string path, string fac_id) {
-	fstream x, y;
-	x.open(path, ios::in);
-	y.open(pl, ios::out);
+// To remove faculty for this course in lib/coursedata
+int rmFac(string path, string fac_id) {
+	fstream x(path, ios::in);
+	err_open(x, path);
+	fstream y(pl, ios::out);
+	err_open(y, pl);
 	string s1, s2;
 	int n;
 	x >> n;
@@ -170,10 +180,11 @@ void rmFac(string path, string fac_id) {
 }
 
 // Overload previous utility to remove the faculty from all courses they are a part of
-void rmFac(string id) {
+int rmFac(string id) {
 	string cpath = b + f + c + id + ext;
 	string c_id;
 	fstream x(cpath, ios::in);
+	err_open(x, cpath);
 	while (x >> c_id) {
 		string fpath = b + d + c_id + ext;
 		rmFac(fpath, id);
@@ -182,12 +193,12 @@ void rmFac(string id) {
 	remove(cpath.c_str());
 }
 
-// To remove a course from the file in bin/faculty/courses and bin/student/courses
-void rmCourse(string path, string c_id) {
-	fstream x, y;
-	x.open(path, ios::in);
-	if (!x) cout << "F\n";
-	y.open(pl, ios::out);
+// To remove a course from the file in lib/faculty/courses and lib/student/courses
+int rmCourse(string path, string c_id) {
+	fstream x(path, ios::in);
+	err_open(x, path);
+	fstream y(pl, ios::out);
+	err_open(y, pl);
 	string s, t;
 	while(getline(x, s)) {
 		if (s.substr(0, 6) != c_id) y << s << "\n";
@@ -202,9 +213,10 @@ void rmCourse(string path, string c_id) {
 }
 
 // Overload previous utility to remove the course from the filesystem completely
-void rmCourse(string c_id) {
+int rmCourse(string c_id) {
 	string fpath = b + d + c_id + ext;
 	fstream x(fpath, ios::in);
+	err_open(x, fpath);
 	string s1, s2;
 	int n;
 	x >> n;
@@ -219,8 +231,9 @@ void rmCourse(string c_id) {
 	}
 	x.close();
 	fstream y(c_txt, ios::in);
+	err_open(y, c_txt);
 	fstream z(pl, ios::out);
-	if (!z) cout << "F\n";
+	err_open(z, pl);
 	while (getline(y, s)) {
 		if (s.substr(0, 6) != c_id) z << s;
 		if (y.eof()) {
@@ -234,18 +247,18 @@ void rmCourse(string c_id) {
 	rename(pl.c_str(), c_txt.c_str());
 }
 
-// To remove a user from the users lists in bin or a course from the course list in bin
+// To remove a user from the users lists in lib
 void delUsr(string uniq, int cl) {
-	fstream x, y;
 	string f;
 	if (cl == 2) f = ad;
 	else if (cl == 1) f = fa;
 	else if (cl == 0) f = st;
-	y.open(pl, ios::out);
+	fstream x(f, ios::in);
+	err_open(x, f);
+	fstream y(pl, ios::out);
+	err_open(y, pl);
 	string s;
-	while (x >> s) {
-		if (s != uniq) y << s << "\n";
-	}
+	while (x >> s) if (s != uniq) y << s << "\n";
 	x.close();
 	y.close();
 	remove(f.c_str());
@@ -255,15 +268,14 @@ void delUsr(string uniq, int cl) {
 // To check the status of a course given its code
 int getStatus(string code) {
 	fstream f(c_txt, ios::in);
+	err_open(f, c_txt);
 	string s;
 	int a, b, c;
 	while(f >> s) {
 		if (s == code) {
 			f >> a >> b >> c;
 			return c;
-		} else {
-			getline(f, s);
-		}
+		} else getline(f, s);
 	}
 	return 0;
 }
