@@ -71,7 +71,7 @@ int editStrength(string id, int delta) {
 	f1.close();
 	f2.close();
 	err_ret((remove(c_txt.c_str()) == 0), "Failed to delete file %s.", c_txt.c_str());
-	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), c_txt.c_str());
+	err_ret((rename(pl.c_str(), c_txt.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), c_txt.c_str());
 	return 0;
 error:
 	if (f1.is_open()) f1.close();
@@ -156,11 +156,11 @@ int updStatus(string code, int stat) {
 	x.close();
 	y.close();
 	err_ret((remove(c_txt.c_str()) == 0), "Failed to delete file %s.", c_txt.c_str());
-	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), c_txt.c_str());
+	err_ret((rename(pl.c_str(), c_txt.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), c_txt.c_str());
 	return 0;
 error:
-	if (x.open()) x.close();
-	if (y.open()) y.close();
+	if (x.is_open()) x.close();
+	if (y.is_open()) y.close();
 	return -1;
 }
 
@@ -190,7 +190,7 @@ int addFac(string path, string fac_id) {
 	}
 	y.close();
 	err_ret((remove(path.c_str()) == 0), "Failed to delete file %s.", path.c_str());
-	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), path.c_str());
+	err_ret((rename(pl.c_str(), path.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), path.c_str());
 	return 0;
 error:
 	if (x.is_open()) x.close();
@@ -217,7 +217,7 @@ int rmFac(string path, string fac_id) {
 	x.close();
 	y.close();
 	err_ret((remove(path.c_str()) == 0), "Failed to delete file %s.", path.c_str());
-	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), path.c_str());
+	err_ret((rename(pl.c_str(), path.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), path.c_str());
 error:
 	if (x.is_open()) x.close();
 	if (y.is_open()) y.close();
@@ -259,7 +259,7 @@ int rmCourse(string path, string c_id) {
 	}
 	y.close();
 	err_ret((remove(path.c_str()) == 0), "Failed to delete file %s.", path.c_str());
-	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), path.c_str());
+	err_ret((rename(pl.c_str(), path.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), path.c_str());
 error:
 	if (x.is_open()) x.close();
 	if (y.is_open()) y.close();
@@ -299,7 +299,7 @@ int rmCourse(string c_id) {
 	z.close();
 	err_ret((remove(fpath.c_str()) == 0), "Failed to delete file %s.", fpath.c_str());
 	err_ret((remove(c_txt.c_str()) == 0), "Failed to delete file %s.", c_txt.c_str());
-	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), c_txt.c_str());
+	err_ret((rename(pl.c_str(), c_txt.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), c_txt.c_str());
 	return 0;
 error:
 	if (x.is_open()) x.close();
@@ -323,7 +323,7 @@ int delUsr(string uniq, int cl) {
 	x.close();
 	y.close();
 	err_ret((remove(f.c_str()) == 0), "Failed to delete file %s.", f.c_str());
-	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), f.c_str());
+	err_ret((rename(pl.c_str(), f.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), f.c_str());
 	return 0;
 error:
 	if (x.is_open()) x.close();
