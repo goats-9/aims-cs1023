@@ -89,14 +89,12 @@ error:
 
 int Student::regCourse(string code) {
 	string x = getID();
-	string fpath = b + s + c + x + ext;
-	fstream file(fpath, ios::app);
+	string fpath = b + s + c + x + ext, cpath = b + d + code + ext;
+	fstream file(fpath, ios::app), cfile(cpath, ios::app);
 	err_open(file, fpath);
+	err_open(cfile, cpath);
 	file << code << " NA\n";
 	file.close();
-	string cpath = b + d + code + ext;
-	fstream cfile(cpath, ios::app);
-	err_open(cfile, cpath);
 	cfile << x << " NA\n";
 	cfile.close();
 	err_ret((editStrength(code, 1) == 0), "Failed to edit course strength.");
@@ -108,9 +106,7 @@ error:
 }
 
 int Student::deregCourse(string code) {
-	string x = getID();
-	string fpath = b + s + c + x + ext;
-	string cpath = b + d + code + ext;
+	string x = getID(), fpath = b + s + c + x + ext, cpath = b + d + code + ext;
 	err_ret((delCourse(fpath, code) == 0), "Failed to delete course from course records.");
 	err_ret((delStudent(cpath, x) == 0), "Failed to delete course from student records.");
 	err_ret((editStrength(code, -1) == 0), "Failed to edit course strength.");
