@@ -28,9 +28,11 @@ error:
 int delStudent(string file, string st_id) {
 	fstream x, y;
 	string s1, s2;
-	x.open(file, ios::in);
-	y.open(pl, ios::out);
 	int n;
+	x.open(file, ios::in);
+	err_open(x, file);
+	y.open(pl, ios::out);
+	err_open(y, pl);
 	x >> n;
 	y << n << "\n";
 	for (int i = 0; i < n; i++) {
@@ -68,7 +70,7 @@ int editStrength(string id, int delta) {
 	}
 	f1.close();
 	f2.close();
-	err_ret((remove(c_txt.c_str() == 0), "Failed to delete file %s.", c_txt.c_str());
+	err_ret((remove(c_txt.c_str()) == 0), "Failed to delete file %s.", c_txt.c_str());
 	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), c_txt.c_str());
 	return 0;
 error:
@@ -214,7 +216,7 @@ int rmFac(string path, string fac_id) {
 	while(x >> s1 >> s2) y << s1 << " " << s2 << "\n";
 	x.close();
 	y.close();
-	err_ret((remove(path.c_str() == 0), "Failed to delete file %s.", path.c_str());
+	err_ret((remove(path.c_str()) == 0), "Failed to delete file %s.", path.c_str());
 	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), path.c_str());
 error:
 	if (x.is_open()) x.close();
@@ -268,18 +270,18 @@ error:
 int rmCourse(string c_id) {
 	string fpath = b + d + c_id + ext;
 	fstream x, y, z;
-	string s1, s2;
+	string s1, s2, fac_path, st_path;
 	int n;
 	x.open(fpath, ios::in);
 	err_open(x, fpath);
 	x >> n;
 	for (int i = 0; i < n; i++) {
 		x >> s1;
-		string fac_path = b + f + c + s1 + ext;
+		fac_path = b + f + c + s1 + ext;
 		err_ret((rmCourse(fac_path.c_str(), c_id) == 0), "Failed to remove course %s from faculty records.", c_id.c_str());
 	}
 	while (x >> s1 >> s2) {
-		string st_path = b + s + c + s1 + ext;
+		st_path = b + s + c + s1 + ext;
 		err_ret((rmCourse(st_path.c_str(), c_id) == 0), "Failed to remove course %s from student records.", c_id.c_str());
 	}
 	x.close();
@@ -287,8 +289,8 @@ int rmCourse(string c_id) {
 	err_open(y, c_txt);
 	z.open(pl, ios::out);
 	err_open(z, pl);
-	while (getline(y, s)) {
-		if (s.substr(0, 6) != c_id) z << s;
+	while (getline(y, s1)) {
+		if (s1.substr(0, 6) != c_id) z << s1;
 		if (y.eof()) {
 			y.close();
 			break;
