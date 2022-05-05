@@ -226,8 +226,9 @@ error:
 int Admin::removeUser(string uniq, int cl) {
 	string passfile = b + (!cl ? s : (cl == 1 ? f : a)) + p + uniq + ext, cpath;
 	err_ret((remove(passfile.c_str()) == 0), "Failed to remove password file of user.");
-	if (cl == 1) err_ret((rmFac(uniq) == 0), "Failed to remove faculty from course records completely.");
-	else if (cl == 0) {
+	if (cl == 1)  {
+		err_ret((rmFac(uniq) == 0), "Failed to remove faculty from course records completely.");
+	} else if (cl == 0) {
 		cpath = b + s + c + uniq + ext;
 		err_ret((remove(cpath.c_str()) == 0), "Failed to remove course file in student records.");
 	}
