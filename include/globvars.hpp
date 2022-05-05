@@ -3,8 +3,8 @@
 #define _GLOBVARS_H_
 #endif
 // For backtraces
-#define err_ret(A, M) if (!A) {fprintf(stderr, "[ERROR] %s:%d: " M "\n", __FILE__, __LINE__); return -1} 
-#define err(A, M) if (!A) {fprintf(stderr, "[ERROR] " M "\n"); continue;}
+#define err_ret(A, M, ...) if (!A) {fprintf(stderr, "[ERROR] %s:%d: " M "\n", __FILE__, __LINE__, __VA_ARGS__); return -1;}   // Exit value
+#define err_main(A, M, ...) if (!A) {fprintf(stderr, "[ERROR] %s:%d" M "\n", __FILE__, __LINE__, __VA_ARGS__); continue;}     // Main program does not terminate
 
 #include <bits/stdc++.h>
 using namespace std;
