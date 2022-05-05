@@ -6,17 +6,22 @@ using namespace std;
 
 // To remove the course from the text file in lib/students/courses/
 int delCourse(string file, string code) {
-	fstream x(file, ios::in);
+	fstream x, y;
+	x.open(file, ios::in);
 	err_open(x, file);
-	fstream y(pl, ios::out);
+	y.open(pl, ios::out);
 	err_open(y, pl);
 	string s1, s2;
 	while (x >> s1 >> s2) if (s1 != code) y << s1 << " " << s2 <<  "\n";
 	x.close();
 	y.close();
-	remove(file.c_str());
-	rename(pl.c_str(), file.c_str());
+	err_ret((remove(file.c_str()) == 0), "Failed to delete file %s.", file.c_str());
+	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), file.c_str());
 	return 0;
+error:
+	if (x.is_open()) x.close();
+	if (y.is_open()) y.close();
+	return -1;
 }
 
 // To remove the student from the text file in lib/coursedata
@@ -35,8 +40,12 @@ int delStudent(string file, string st_id) {
 	while (x >> s1 >> s2) if (s1 != st_id) y << s1 << " " << s2 << "\n";
 	x.close();
 	y.close();
-	remove(file.c_str());
-	rename(pl.c_str(), file.c_str());
+	err_ret((remove(file.c_str()) == 0), "Failed to delete file %s.", file.c_str());
+	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), file.c_str());
+error:
+	if (x.is_open()) x.close();
+	if (y.is_open()) y.close();
+	return -1;
 }
 
 // To change the current course strength
@@ -59,8 +68,13 @@ int editStrength(string id, int delta) {
 	}
 	f1.close();
 	f2.close();
-	remove(c_txt.c_str());
-	rename(pl.c_str(), c_txt.c_str());
+	err_ret((remove(c_txt.c_str() == 0), "Failed to delete file %s.", c_txt.c_str());
+	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), c_txt.c_str());
+	return 0;
+error:
+	if (f1.is_open()) f1.close();
+	if (f2.is_open()) f2.close();
+	return -1;
 }
 
 // To update the grade of the student in lib/students/courses/
@@ -76,8 +90,8 @@ void updGrade_st(string file, string c_id, string grade) {
 	}
 	x.close();
 	y.close();
-	remove(file.c_str());
-	rename(pl.c_str(), file.c_str());
+	err_ret((remove(file.c_str()) == 0), "Failed to delete file %s.", file.c_str());
+	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), file.c_str());
 }
 
 // To update the grade of the student in lib/coursedata
@@ -100,8 +114,8 @@ int updGrade_cr(string file, string st_id, string grade) {
 	}
 	x.close();
 	y.close();
-	remove(file.c_str());
-	rename(pl.c_str(), file.c_str());
+	err_ret((remove(file.c_str()) == 0), "Failed to delete file %s.", file.c_str());
+	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), file.c_str());
 }
 	
 // To update the status of a course in lib/coursedata/courses.txt
@@ -126,15 +140,16 @@ int updStatus(string code, int stat) {
 	}
 	x.close();
 	y.close();
-	remove(c_txt.c_str());
-	rename(pl.c_str(), c_txt.c_str());
+	err_ret((remove(c_txt.c_str()) == 0), "Failed to delete file %s.", c_txt.c_str());
+	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), c_txt.c_str());
 }
 
 // To add faculty for this course in lib/coursedata
-void addFac(string path, string fac_id) {
-	fstream x(path, ios::in);
+int addFac(string path, string fac_id) {
+	fstream x, y;
+	x.open(path, ios::in);
 	err_open(x, path);
-	fstream y(pl, ios::out|ios::app);
+	y.open(pl, ios::out|ios::app);
 	err_open(y, pl);
 	string s;
 	int n;
@@ -154,15 +169,21 @@ void addFac(string path, string fac_id) {
 		}
 	}
 	y.close();
-	remove(path.c_str());
-	rename(pl.c_str(), path.c_str());
+	err_ret((remove(path.c_str()) == 0), "Failed to delete file %s.", path.c_str());
+	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), path.c_str());
+	return 0;
+error:
+	if (x.is_open()) x.close();
+	if (y.is_open()) y.close();
+	return -1;
 }
 
 // To remove faculty for this course in lib/coursedata
 int rmFac(string path, string fac_id) {
-	fstream x(path, ios::in);
+	fstream x, y;
+	x.open(path, ios::in);
 	err_open(x, path);
-	fstream y(pl, ios::out);
+	y.open(pl, ios::out);
 	err_open(y, pl);
 	string s1, s2;
 	int n;
@@ -175,8 +196,12 @@ int rmFac(string path, string fac_id) {
 	while(x >> s1 >> s2) y << s1 << " " << s2 << "\n";
 	x.close();
 	y.close();
-	remove(path.c_str());
-	rename(pl.c_str(), path.c_str());
+	err_ret((remove(path.c_str() == 0), "Failed to delete file %s.", path.c_str());
+	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), path.c_str());
+error:
+	if (x.is_open()) x.close();
+	if (y.is_open()) y.close();
+	return -1;
 }
 
 // Overload previous utility to remove the faculty from all courses they are a part of
@@ -190,14 +215,19 @@ int rmFac(string id) {
 		rmFac(fpath, id);
 	}
 	x.close();
-	remove(cpath.c_str());
+	err_ret((remove(cpath.c_str()) == 0), "Failed to delete file %s.", cpath.c_str());
+	return 0;
+error:
+	if (x.is_open()) x.close();
+	return -1;
 }
 
 // To remove a course from the file in lib/faculty/courses and lib/student/courses
 int rmCourse(string path, string c_id) {
-	fstream x(path, ios::in);
+	fstream x, y;
+	x.open(path, ios::in);
 	err_open(x, path);
-	fstream y(pl, ios::out);
+	y.open(pl, ios::out);
 	err_open(y, pl);
 	string s, t;
 	while(getline(x, s)) {
@@ -208,14 +238,19 @@ int rmCourse(string path, string c_id) {
 		}
 	}
 	y.close();
-	remove(path.c_str());
-	rename(pl.c_str(), path.c_str());
+	err_ret((remove(path.c_str()) == 0), "Failed to delete file %s.", path.c_str());
+	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), path.c_str());
+error:
+	if (x.is_open()) x.close();
+	if (y.is_open()) y.close();
+	return -1;
 }
 
 // Overload previous utility to remove the course from the filesystem completely
 int rmCourse(string c_id) {
 	string fpath = b + d + c_id + ext;
-	fstream x(fpath, ios::in);
+	fstream x, y, z;
+	x.open(fpath, ios::in);
 	err_open(x, fpath);
 	string s1, s2;
 	int n;
@@ -223,16 +258,16 @@ int rmCourse(string c_id) {
 	for (int i = 0; i < n; i++) {
 		x >> s1;
 		string fac_path = b + f + c + s1 + ext;
-		rmCourse(fac_path.c_str(), c_id);
+		err_ret((rmCourse(fac_path.c_str(), c_id) == 0), "Failed to remove course %s from faculty records.", c_id.c_str());
 	}
 	while (x >> s1 >> s2) {
 		string st_path = b + s + c + s1 + ext;
-		rmCourse(st_path.c_str(), c_id);
+		err_ret((rmCourse(st_path.c_str(), c_id) == 0), "Failed to remove course %s from student records.", c_id.c_str());
 	}
 	x.close();
-	fstream y(c_txt, ios::in);
+	y.open(c_txt, ios::in);
 	err_open(y, c_txt);
-	fstream z(pl, ios::out);
+	z.open(pl, ios::out);
 	err_open(z, pl);
 	while (getline(y, s)) {
 		if (s.substr(0, 6) != c_id) z << s;
@@ -242,27 +277,38 @@ int rmCourse(string c_id) {
 		}
 	}
 	z.close();
-	remove(fpath.c_str());
-	remove(c_txt.c_str());
-	rename(pl.c_str(), c_txt.c_str());
+	err_ret((remove(fpath.c_str()) == 0), "Failed to delete file %s.", fpath.c_str());
+	err_ret((remove(c_txt.c_str()) == 0), "Failed to delete file %s.", c_txt.c_str());
+	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), c_txt.c_str());
+	return 0;
+error:
+	if (x.is_open()) x.close();
+	if (y.is_open()) y.close();
+	if (z.is_open()) z.close();
+	return -1;
 }
 
 // To remove a user from the users lists in lib
-void delUsr(string uniq, int cl) {
-	string f;
+int delUsr(string uniq, int cl) {
+	fstream x, y;
+	string f, s;
 	if (cl == 2) f = ad;
 	else if (cl == 1) f = fa;
 	else if (cl == 0) f = st;
-	fstream x(f, ios::in);
+	x.open(f, ios::in);
 	err_open(x, f);
-	fstream y(pl, ios::out);
+	y.open(pl, ios::out);
 	err_open(y, pl);
-	string s;
 	while (x >> s) if (s != uniq) y << s << "\n";
 	x.close();
 	y.close();
-	remove(f.c_str());
-	rename(pl.c_str(), f.c_str());
+	err_ret((remove(f.c_str()) == 0), "Failed to delete file %s.", f.c_str());
+	err_ret((rename(pl.c_str(), file.c_str()) == 0), "Failed to rename file %s to %s.", pl.c_str(), f.c_str());
+	return 0;
+error:
+	if (x.is_open()) x.close();
+	if (y.is_open()) y.close();
+	return -1;
 }
 
 // To check the status of a course given its code
@@ -278,6 +324,9 @@ int getStatus(string code) {
 		} else getline(f, s);
 	}
 	return 0;
+error:
+	if (f.is_open()) f.close();
+	return -1;
 }
 
 /* MISCELLANEOUS UTILITIES */
