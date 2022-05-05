@@ -6,17 +6,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void delCourse(string, string);
-void delStudent(string, string);
-void editStrength(string, int);
-void updGrade_st(string, string, string);
-void updGrade_cr(string, string, string);
-void updStatus(string, int);
-void addFac(string, string);
-void rmFac(string, string);
-void rmFac(string);
-void rmCourse(string, string);
-void rmCourse(string);
-void delUsr(string, int);
+int delCourse(string, string);
+int delStudent(string, string);
+int editStrength(string, int);
+int updGrade_st(string, string, string);
+int updGrade_cr(string, string, string);
+int updStatus(string, int);
+int addFac(string, string);
+int rmFac(string, string);
+int rmFac(string);
+int rmCourse(string, string);
+int rmCourse(string);
+int delUsr(string, int);
 string gen();
 int getStatus(string);
