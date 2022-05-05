@@ -4,6 +4,7 @@
 #endif
 // For backtraces
 #define err_open(A, M, ...) if (!A.is_open()) {A.close(); fprintf(stderr, "[ERROR] %s:%d: " M "\n", __FILE__, __LINE__, __VA_ARGS__); return -1;}   // File not opened
+#define err_ret(A, M, ...) if (!A) {fprintf(stderr, "[ERROR] %s:%d" M "\n", __FILE__, __LINE__, __VA_ARGS__); return -1;}
 #define err_main(A, M, ...) if (!A) {fprintf(stderr, "[ERROR] %s:%d" M "\n", __FILE__, __LINE__, __VA_ARGS__); continue;}     // Main program does not terminate
 
 #include <bits/stdc++.h>
