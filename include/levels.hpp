@@ -15,7 +15,7 @@ class Course {
 public:
 	Course(string, int, int, int, int, int);
 	string getCode();
-	void print_entry();
+	int print_entry();
 };
 
 // Any user has a username and password
@@ -26,14 +26,14 @@ class User {
 public:
 	User(string, string, int);
 	string getID();
-	void passwd(string);
+	int passwd(string);
 };
 
 class Student:public User {
 public:
 	using User::User;
-	void viewAllCourses();
-	void viewRegCourses();
+	int viewAllCourses();
+	int viewRegCourses();
 	int regCourse(string);
 	int deregCourse(string);
 };
@@ -41,7 +41,7 @@ public:
 class Faculty:public User {
 public:
 	using User::User;
-	void viewCourses();
+	int viewCourses();
 	int allotGrade(string, string, string);
 	int submitGrades(string);
 };
