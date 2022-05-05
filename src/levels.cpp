@@ -139,7 +139,7 @@ error:
 int Faculty::allotGrade(string c_id, string st_id, string grade) {
 	string fpath1 = b + s + c + st_id + ext, fpath2 = b + d + c_id + ext;
 	err_ret((updGrade_st(fpath1, c_id, grade) == 0), "Failed to update grade of student in student records.");
-	err_ret((updGrade_cr(fpath2, st_id, grade) = 0), "Failed to update grade of student in course records.");
+	err_ret((updGrade_cr(fpath2, st_id, grade) == 0), "Failed to update grade of student in course records.");
 	return 0;
 error:
 	return -1;
@@ -178,7 +178,7 @@ error:
 
 int Admin::addCourse(Course cr, string fac_id) {
 	fstream cfile, fac;
-	string cfpath = b + d + cr.getCode() + ext;, facpath = b + f + c + fac_id + ext;
+	string cfpath = b + d + cr.getCode() + ext, facpath = b + f + c + fac_id + ext;
 	err_ret((cr.print_entry() == 0), "Failed to add course entry to course records.");
 	cfile.open(cfpath, ios::app);
 	err_open(cfile, cfpath);
@@ -211,14 +211,13 @@ error:
 
 int Admin::addUser(string id, string pw, int cl) { 
 	fstream file, mfile;
-	string fpath = b + (!cl ? s : (cl == 1 ? f : a)) + p + id + ext;
-	string mpath = !cl ? st : (cl == 1 ? fa : ad);
+	string fpath = b + (!cl ? s : (cl == 1 ? f : a)) + p + id + ext, mpath = !cl ? st : (cl == 1 ? fa : ad);
 	file.open(fpath, ios::out|ios::trunc);
 	err_open(file, fpath);
 	file << pw << "\n";
 	file.close();
 	mfile.open(mpath, ios::app);
-	err_open(mfile, fmpath);
+	err_open(mfile, mpath);
 	mfile << id << "\n";
 	mfile.close();
 	return 0;
