@@ -2,7 +2,9 @@
 Submission for implementation of AIMS portal for CS1023 at IITH
 
 # Installation, Usage and Maintenance
-This program works only on Linux/macOS. It has been tested on Arch Linux and Ubuntu WSL. If you're on Windows, get a VM or use the WSL. To install, open a terminal window, and type:
+Works only on Linux/macOS. 
+
+Tested on Arch Linux and WSL (Ubuntu and [Arch Linux](https://github.com/yuk7/ArchWSL)). If you're on Windows, get a VM or use the WSL. To install, open a terminal window, and type:
 
 `$ git clone https://github.com/goats-9/aims-cs1023.git && cd aims-cs1023`
 
@@ -71,8 +73,8 @@ This implementation of the student portal focusses on B.Tech courses for duratio
 1. Input handlers prevent hacking by safely flushing input stream `stdin` using `getchar`.
 2. Data integrity checks set in place to prevent accepting inputs not conforming to templates, and to prevent data repetition and/or redundancy, thereby enhancing data security.
 3. Data stored in as minimal a filesystem as possible, making it easy to port and use. Also facilitates views for members of all clearances.
-4. Random cryptosecure initial password generation, using `/dev/urandom`. Logins are not persistent, thereby enhancing security at the (minor) cost of convenience. **Note that any password has to be of length at least 8 characters.**
-5. Use of error messages as backtrace stacks 
+4. Random cryptosecure initial password generation, using `/dev/urandom`. Logins are not persistent, thereby enhancing security at the (minor) cost of convenience. **Note that any password, even if user-defined, has to be at least 8 characters.**
+5. Use of error messages as backtrace stacks.
 
 # Acknowledgements
 Massive thank you to my elder brother for patiently testing out the portal and providing valuable feedback to improve the user experience.
