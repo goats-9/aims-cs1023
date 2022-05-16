@@ -99,11 +99,11 @@ int isLegalID(string s, int cl) {
 		for (int i = 9; i < 14; i++) if (!isdigit(s[i])) return 0;
 		return 1;
 	} else if (cl == 1) {
-		if (s.size() != 9) return 0;
+		if (s.size() != 8) return 0;
 		if (find(dspln.begin(), dspln.end(), s.substr(0, 2)) == dspln.end()) return 0;
 		if (!isdigit(s[2]) || !isdigit(s[3])) return 0;
-		if (s[4] != '_' || s[5] != 'F') return 0;
-		for (int i = 6; i < 9; i++) if (!isdigit(s[i])) return 0;
+		if (s[4] != 'F') return 0;
+		for (int i = 5; i < 8; i++) if (!isdigit(s[i])) return 0;
 		return 1;
 	} else if (cl == 2) {
 		if (s.size() != 7) return 0;

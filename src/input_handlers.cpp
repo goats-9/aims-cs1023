@@ -15,7 +15,7 @@ void dump(string path) {
 	}
 }
 
-// To return a string (using getline)
+// To return a string (using getchar)
 // Second argument determines if the first argument
 // is a message or a path to a file dump.
 // x == 0 --> Message
@@ -38,19 +38,17 @@ string get_str(string prompt, int x) {
 	return s;
 }
 
-// To return an integer (using cin)
+// To return an integer (using getchar)
 int get_int(string prompt, int x) {
-	int n;
+	long long n = 0;
+	int lck = 0;
 	if (x) dump(prompt);
 	else cout << prompt;
-	while (1) {
-		if (cin >> n) {
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');	/// Clean up newlines
-			return n;
-		} else {
-			cout << "Invalid integer input! ";
-			dump(prompt);
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		}
+	char ch;
+	while ((ch = getchar()) != '\n') {
+		if (!isdigit(ch)) lck = 1, n = -1;
+		if (!lck) n = 10*n + (ch - '0');
 	}
+	if (n == -1) cout << "No input or bad input.\n";
+	return n;
 }
